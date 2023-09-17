@@ -17,7 +17,7 @@ NEWSPIDER_MODULE = "bookscraper.spiders"
 #USER_AGENT = "bookscraper (+http://www.yourdomain.com)"
 
 # Obey robots.txt rules
-ROBOTSTXT_OBEY = True
+ROBOTSTXT_OBEY = False
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 #CONCURRENT_REQUESTS = 32
@@ -51,7 +51,10 @@ SPIDER_MIDDLEWARES = {
 # Enable or disable downloader middlewares
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 DOWNLOADER_MIDDLEWARES = {
-   "bookscraper.middlewares.BookscraperDownloaderMiddleware": 543,
+   # "bookscraper.middlewares.BookscraperDownloaderMiddleware": 543,
+   'bookscraper.middlewares.ScrapeOpsFakeBrowserHeaderAgentMiddleware': 400,
+   'rotating_proxies.middlewares.RotatingProxyMiddleware': 610,
+   'rotating_proxies.middlewares.BanDetectionMiddleware': 620,
 }
 
 # Enable or disable extensions
@@ -65,7 +68,7 @@ DOWNLOADER_MIDDLEWARES = {
 ITEM_PIPELINES = {
    "bookscraper.pipelines.BookscraperPipeline": 300,
   
-   'bookscraper.pipelines.SaveToMySQLPipeline': 400,
+   # 'bookscraper.pipelines.SaveToMySQLPipeline': 400,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
@@ -96,3 +99,15 @@ FEED_EXPORT_ENCODING = "utf-8"
 FEEDS ={
     'booksdata.json':{'format':'json'}
 }
+
+SCRAPEOPS_API_KEY = '777dafdb-80a6-4e53-84ce-eca1aa057581'
+SCRAPEOPS_FAKE_USER_AGENT_ENDPOINT = True
+CRAPEOPS_NUM_RESULTS=30
+# SCRAPEOPS_FAKE_USER_AGENT_ENDPOINT= 'http://headers.scrapeops.io/v1/user-agents'
+
+
+# ROTATING_PROXY_LIST = [
+#     '36.90.225.79:4153',
+#     '185.220.226.199:808',
+#     '83.17.222.146:5678',
+# ]

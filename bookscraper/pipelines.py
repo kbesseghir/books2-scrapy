@@ -66,8 +66,8 @@ class SaveToMySQLPipeline:
     def __init__(self):
         self.conn = mysql.connector.connect(
             host = 'localhost',
-            user = 'kheira',
-            password = 'password',
+            user = 'user',
+            password = '******',
             database = 'books'
         )
 
